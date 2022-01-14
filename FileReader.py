@@ -48,14 +48,11 @@ class FileReader():
 
         command = command_bindings["command"]
 
-        if command in self.meanings:
-            instruction = self.meanings[command]["instruction"]
-        else:
+        if command not in self.meanings:
             print("command defined in file '" + command + "' has no meaning")
             return -1;
-        
-        #print ("command to be carried out : " + instruction)
-        instruction_value_storage.append(instruction)
+
+        instruction_value_storage.append(command)
 
         if "uses_value" in self.meanings[command]:
             if "value" in command_bindings:
@@ -63,9 +60,7 @@ class FileReader():
                 instruction_value_storage.append(value)
             else:
                 print("value not provided for command '"+ command + "' where a value was expected")
-            
-            #print ("value to be used : " + value)
-        
+                
         return instruction_value_storage
 
 #--------------------------------------------------------------------------------------------------
